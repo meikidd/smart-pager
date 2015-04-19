@@ -1,0 +1,102 @@
+<nav class="nav-pagination">
+	<ul class="pagination">
+	<%
+	current = current*1;
+	var prev = current*1-1;
+	var next = current*1+1;
+	%>
+	<!-- 8页以内 -->
+	<% if(total <= 8  && total > 1) { %>
+
+		<% if(prev) { %>
+		<li><a href="<%= urlRule %><%= prev %>" data-page="<%= prev %>">&laquo;</a></li>
+		<% } %>
+
+		<% for(var i=1; i <= total; i++) { %>
+			<% if(i == current) { %>
+			<li class="active"><span><%= i %></span></li>
+			<% }else { %>
+			<li><a href="<%= urlRule %><%= i %>" data-page="<%= i %>"><%= i %></a></li>
+			<% } %>
+		<% } %>
+
+		<% if(total != current) { %>
+		<li><a href="<%= urlRule %><%= next %>" data-page="<%= next %>">&raquo;</a></li>
+		<% } %>
+	<% } %>
+
+	<!-- 超过 8 页，当前页面在 1 到 =5 之间 -->
+	<% if(total > 8 && current <= 5) { %>
+
+		<% if(prev) { %>
+		<li><a href="<%= urlRule %><%= prev %>" data-page="<%= prev %>">&laquo;</a></li>
+		<% } %>
+
+		<% for(var i=1; i <= 7; i++) { %>
+			<% if(i == current) { %>
+			<li class="active"><span><%= i %></span></li>
+			<% }else { %>
+			<li><a href="<%= urlRule %><%= i %>" data-page="<%= i %>"><%= i %></a></li>
+			<% } %>
+		<% } %>
+
+		<li><span>...</span>
+		<li><a href="<%= urlRule %><%= total %>" data-page="<%= total %>"><%= total %></a></li>
+
+		<% if(total != current) { %>
+		<li><a href="<%= urlRule %><%= next %>" data-page="<%= next %>">&raquo;</a></li>
+		<% } %>
+	<% } %>
+
+	<!-- 超过 8 页，当前页面大于等于total-4  -->
+	<% if(total > 8 && current >= (total-4)) { %>
+
+		<% if(prev) { %>
+		<li><a href="<%= urlRule %><%= prev %>">&laquo;</a></li>
+		<% } %>
+
+		<li><a href="<%= urlRule %>1" data-page="1">1</a></li>
+		<li><span>...</span></li>
+
+		<% for(var i=total-6; i <= total; i++) { %>
+			<% if(i == current) { %>
+			<li class="active"><span><%= i %></span></li>
+			<% }else { %>
+			<li><a href="<%= urlRule %><%= i %>" data-page="<%= i %>"><%= i %></a></li>
+			<% } %>
+		<% } %>
+
+		<% if(total != current) { %>
+		<li><a href="<%= urlRule %><%= next %>" data-page="<%= next %>">&raquo;</a></li>
+		<% } %>
+	<% } %>
+
+	<!-- 超过 8 页，当前页面在 5 到 total-4 之间 -->
+	<% if(total > 8 && current > 5 && current < (total-4)) { %>
+
+		<% if(prev) { %>
+		<li><a href="<%= urlRule %><%= prev %>">&laquo;</a></li>
+		<% } %>
+
+		<li><a href="<%= urlRule %>1" data-page="1">1</a></li>
+		<li><span>...</span></li>
+
+		<% for(var i=current-3; i <= current+3; i++) { %>
+			<% if(i == current) { %>
+			<li class="active"><span><%= i %></span></li>
+			<% }else { %>
+			<li><a href="<%= urlRule %><%= i %>" data-page="<%= i %>"><%= i %></a></li>
+			<% } %>
+		<% } %>
+
+		<li><span>...</span></li>
+		<li><a href="<%= urlRule %><%= total %>" data-page="<%= total %>"><%= total %></a></li>
+		
+		<% if(total != current) { %>
+		<li><a href="<%= urlRule %><%= next %>" data-page="<%= next %>">&raquo;</a></li>
+		<% } %>
+		
+	<% } %>
+
+	</ul>
+</nav>
