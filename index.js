@@ -5,7 +5,7 @@ const read = require('fs').readFile;
 
 var template;
 
-function render(current, total) {
+function render(current, total, urlRule) {
 	assert(current, 'current page number is required');
 	assert(total, 'total page count is required');
 
@@ -20,7 +20,7 @@ function render(current, total) {
 	var options = {
 		current: current,
 		total: total,
-		urlRule: ''
+		urlRule: urlRule || '/?page='
 	};
 
 	return new Promise(function(resolve, reject) {
