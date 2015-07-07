@@ -26,12 +26,12 @@ function render(current, total, urlRule) {
 	return new Promise(function(resolve, reject) {
 		var path = join(__dirname, 'pagination.ejs');
 		if(template) {
-				resolve(ejs.render(template, options);
+				resolve(ejs.render(template, options));
 		}else{
 			read(path, 'utf8', function(err, data) {
 				if(err) return reject(err);
 				template = data;
-				resolve(ejs.render(template, options);
+				resolve(ejs.render(template, options));
 			});
 		}
 	});
