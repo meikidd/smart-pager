@@ -48,8 +48,8 @@
 		<% } %>
 	<% } %>
 
-	<!-- 超过 8 页，当前页面大于等于total-4  -->
-	<% if(total > 8 && current >= (total-4)) { %>
+	<!-- 超过 8 页，当前页面大于等于total-3  -->
+	<% if(total > 8 && current >= (total-3)) { %>
 
 		<% if(prev) { %>
 		<li><a href="<%= urlRule %><%= prev %>">&laquo;</a></li>
@@ -71,8 +71,8 @@
 		<% } %>
 	<% } %>
 
-	<!-- 超过 8 页，当前页面在 5 到 total-4 之间 -->
-	<% if(total > 8 && current > 5 && current < (total-4)) { %>
+	<!-- 超过 8 页，当前页面在 5 到 total-3 之间 -->
+	<% if(total > 8 && current > 5 && current < (total-3)) { %>
 
 		<% if(prev) { %>
 		<li><a href="<%= urlRule %><%= prev %>">&laquo;</a></li>

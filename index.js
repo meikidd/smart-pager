@@ -3,38 +3,35 @@ const assert = require('assert');
 const join = require('path').join;
 const read = require('fs').readFile;
 
-var template;
+class SmartPager {
 
-function render(current, total, urlRule) {
-	assert(current, 'current page number is required');
-	assert(total, 'total page count is required');
+  constructor({current = 1, total, urlRule = './?page=', templateFile}) {
+  	this.total = total
+  	this.current = current
+  	this.urlRule = urlRule
+  	this.templateHtml = ''
+  	this.templateFile = templateFile || join(__dirname, 'pagination.ejs')
+  }
 
-	if(typeof current !== 'number') {
-		current = current*1;
-	}
-	if(typeof total !== 'number') {
-		total = total*1;
-	}
-	if(!current) return;
-	total = total || current;
-	var options = {
-		current: current,
-		total: total,
-		urlRule: urlRule || '/?page='
-	};
+  render(current = this.current, total, urlRule = this.urlRule) {
 
-	return new Promise(function(resolve, reject) {
-		var path = join(__dirname, 'pagination.ejs');
-		if(template) {
-				resolve(ejs.render(template, options));
-		}else{
-			read(path, 'utf8', function(err, data) {
-				if(err) return reject(err);
-				template = data;
-				resolve(ejs.render(template, options));
-			});
-		}
-	});
+		total = total || this.total || this.current
+		let templateHtml = this.templateHtml
+		let templateFile = this.templateFile
+		let options = {current, total, urlRule}
+
+		return new Promise(function(resolve, reject) {
+			if(templateHtml) {
+					resolve(ejs.render(templateHtml, options))
+			}else{
+				read(templateFile, 'utf8', function(err, data) {
+					if(err) return reject(err)
+					templateHtml = data
+					resolve(ejs.render(templateHtml, options))
+				})
+			}
+		})
+  }
 }
 
-module.exports = render;
+module.exports = SmartPager;
