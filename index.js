@@ -5,7 +5,7 @@ const read = require('fs').readFile;
 
 class SmartPager {
 
-  constructor({current = 1, total, urlRule = './?page=', templateFile}) {
+  constructor({current = 1, total, urlRule = '?page=', templateFile}) {
   	this.total = total
   	this.current = current
   	this.urlRule = urlRule
