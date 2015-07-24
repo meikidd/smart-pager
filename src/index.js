@@ -10,7 +10,7 @@ class SmartPager {
   	this.current = current
   	this.urlRule = urlRule
   	this.templateHtml = ''
-  	this.templateFile = templateFile || join(__dirname, 'pagination.ejs')
+  	this.templateFile = templateFile || join(__dirname, '../src/pagination.ejs')
   }
 
   render(current = this.current, total, urlRule = this.urlRule) {
